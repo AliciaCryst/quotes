@@ -98,38 +98,47 @@
 
   <script>
     const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR7jUZdkBkow5pJYrp-zu9mfM1huNy9RZCGutlJZyeWba914Ey3jDP3kR4031i7zFjSxwASShrTkkrH/pub?output=csv";
-
-    fetch(sheetURL)
-      .then(response => response.text())
-      .then(csv => {
-        const rows = csv.trim().split("\n").map(row => row.split(","));
-        const table = document.getElementById("portfolio");
-        table.innerHTML = "";
-
-        rows.forEach((row, i) => {
-          const tr = document.createElement("tr");
-          row.forEach((cell, j) => {
-            const el = document.createElement(i === 0 ? "th" : "td");
-            el.textContent = cell;
-
-            // Highlight "Change" and "Change %" columns
-            if (i > 0 && (j === 2 || j === 3)) {
-              const val = parseFloat(cell);
-              if (!isNaN(val)) {
-                el.className = val > 0 ? "pos" : (val < 0 ? "neg" : "neutral");
+  
+    function loadTable() {
+      fetch(sheetURL)
+        .then(response => response.text())
+        .then(csv => {
+          const rows = csv.trim().split("\n").map(row => row.split(","));
+          const table = document.getElementById("portfolio");
+          table.innerHTML = "";
+  
+          rows.forEach((row, i) => {
+            const tr = document.createElement("tr");
+            row.forEach((cell, j) => {
+              const el = document.createElement(i === 0 ? "th" : "td");
+              el.textContent = cell;
+  
+              // Highlight Change and Change %
+              if (i > 0 && (j === 2 || j === 3)) {
+                const val = parseFloat(cell);
+                if (!isNaN(val)) {
+                  el.className = val > 0 ? "pos" : (val < 0 ? "neg" : "neutral");
+                }
               }
-            }
-
-            tr.appendChild(el);
+  
+              tr.appendChild(el);
+            });
+            table.appendChild(tr);
           });
-          table.appendChild(tr);
+        })
+        .catch(error => {
+          document.getElementById("portfolio").innerHTML =
+            "<tr><td colspan='5'>Failed to load data.</td></tr>";
+          console.error("Error loading CSV:", error);
         });
-      })
-      .catch(error => {
-        document.getElementById("portfolio").innerHTML =
-          "<tr><td colspan='10'>Failed to load data.</td></tr>";
-        console.error("Error loading CSV:", error);
-      });
+    }
+  
+    // Initial load
+    loadTable();
+  
+    // Refresh every 2 minutes (120000 ms)
+    setInterval(loadTable, 120000);
   </script>
-</body>
+  
+  </body>
 </html>
