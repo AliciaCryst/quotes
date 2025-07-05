@@ -80,12 +80,24 @@
         font-size: 16px;
       }
     }
+
+    .table-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      background: var(--color-table-bg);
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+
   </style>
 </head>
 <body>
 
   <h1>My Portfolio Watchlist</h1>
-  <table id="portfolio"></table>
+  <div class="table-wrapper"></div>
+    <table id="portfolio"></table>
+  </div>
 
   <script>
     const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR7jUZdkBkow5pJYrp-zu9mfM1huNy9RZCGutlJZyeWba914Ey3jDP3kR4031i7zFjSxwASShrTkkrH/pub?output=csv";
