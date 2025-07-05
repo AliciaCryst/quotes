@@ -33,7 +33,7 @@
     }
 
     .table-wrapper {
-      max-width: 300px;
+      max-width: 100%;
       margin: 0;
       overflow-x: auto;
     }
@@ -44,11 +44,11 @@
       border-collapse: collapse;
       background: white;
       box-shadow: 0 0 6px rgba(0,0,0,0.05);
-      font-size: 10;
+      font-size: 10px;
     }
 
     th, td {
-      padding: 6px 8px;
+      padding: 4px 6px;
       border: 1px solid #ccc;
       text-align: left;
       white-space: nowrap;
@@ -56,7 +56,6 @@
       text-overflow: ellipsis;
       font-size: 10px;
       line-height: 1.1;
-      padding: 4px 6px;
     }
 
     th {
@@ -65,10 +64,17 @@
       font-weight: 600;
     }
 
-    /* Fixed column widths */
-    th:nth-child(1), td:nth-child(1) { width: 40px; }
-    th:nth-child(2), td:nth-child(2) { width: 40px; }
-    th:nth-child(3), td:nth-child(3) { width: 30px; }
+    /* Optional: fine-tune widths per column */
+    th:nth-child(1), td:nth-child(1)   { width: 50px; }  /* Symbol */
+    th:nth-child(2), td:nth-child(2)   { width: 55px; }  /* Price */
+    th:nth-child(3), td:nth-child(3)   { width: 45px; }  /* Change */
+    th:nth-child(4), td:nth-child(4)   { width: 55px; }  /* Change % */
+    th:nth-child(5), td:nth-child(5)   { width: 65px; }  /* Pre-Close */
+    th:nth-child(6), td:nth-child(6)   { width: 70px; }  /* Volume */
+    th:nth-child(7), td:nth-child(7)   { width: 55px; }  /* High */
+    th:nth-child(8), td:nth-child(8)   { width: 55px; }  /* Low */
+    th:nth-child(9), td:nth-child(9)   { width: 45px; }  /* P/E */
+    th:nth-child(10), td:nth-child(10) { width: 45px; }  /* Beta */
 
     .pos {
       background: var(--bg-green);
@@ -106,8 +112,8 @@
             const el = document.createElement(i === 0 ? "th" : "td");
             el.textContent = cell;
 
-            // Highlight Change % column
-            if (i > 0 && j === 2) {
+            // Highlight "Change" and "Change %" columns
+            if (i > 0 && (j === 2 || j === 3)) {
               const val = parseFloat(cell);
               if (!isNaN(val)) {
                 el.className = val > 0 ? "pos" : (val < 0 ? "neg" : "neutral");
@@ -121,7 +127,7 @@
       })
       .catch(error => {
         document.getElementById("portfolio").innerHTML =
-          "<tr><td colspan='3'>Failed to load data.</td></tr>";
+          "<tr><td colspan='10'>Failed to load data.</td></tr>";
         console.error("Error loading CSV:", error);
       });
   </script>
