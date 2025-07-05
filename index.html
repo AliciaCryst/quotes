@@ -1,103 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>📉 My Portfolio Watchlist</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        :root {
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
       --font-base: 13px;
-      --font-heading: 18px;
       --font-small: 12px;
-
-      --row-padding: 6px 8px;
-      --row-padding-compact: 4px 6px;
-
-      --color-bg: #f5f5f5;
-      --color-table-bg: #ffffff;
-      --color-text: #222;
-      --color-title: #0055cc;
-
-      --color-pos-bg: #d0f0d0;
-      --color-pos-text: green;
-      --color-neg-bg: #ffdada;
-      --color-neg-text: red;
-      --color-neutral-bg: #f2f2f2;
-      --color-neutral-text: #555;
+      --header-color: #0044cc;
+      --bg-green: #d0f0d0;
+      --text-green: green;
+      --bg-red: #ffdada;
+      --text-red: red;
     }
 
-   body {
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: var(--color-bg);
-      color: var(--color-text);
-      margin: 0;
+      font-size: var(--font-base);
+      background: #f5f5f5;
       padding: 16px;
-      font-size: var(--font-base);
     }
+
     h1 {
-      font-size: var(--font-heading);
-      color: var(--color-title);
+      font-size: 16px;
+      color: var(--header-color);
       margin-bottom: 10px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--color-table-bg);
-      font-size: var(--font-base);
-      table-layout: fixed;  /* Prevents auto-expanding columns */
-    }
-    th, td {
-      max-width: 200px;
-      padding: var(--row-padding);
-      border: 1px solid #ccc;
-      text-align: center;
-    }
-    th {
-      background-color: var(--color-title);
-      color: white;
-      font-weight: 600;
-    }
-    .pos {
-      background-color: var(--color-pos-bg);
-      color: var(--color-pos-text);
-      font-weight: 500;
-    }
-    .neg {
-      background-color: var(--color-neg-bg);
-      color: var(--color-neg-text);
-      font-weight: 500;
-    }
-    .neutral {
-      background-color: var(--color-neutral-bg);
-      color: var(--color-neutral-text);
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: var(--font-small);
-      }
-      table {
-        font-size: var(--font-small);
-      }
-      h1 {
-        font-size: 16px;
-      }
     }
 
     .table-wrapper {
-      max-width: 800px;
+      max-width: 600px;
       margin: 0 auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      background: var(--color-table-bg);
-      border-radius: 6px;
       overflow-x: auto;
     }
 
+    table {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 6px rgba(0,0,0,0.05);
+      font-size: var(--font-base);
+    }
+
+    th, td {
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    th {
+      background-color: var(--header-color);
+      color: white;
+      font-weight: 600;
+    }
+
+    /* Fixed column widths */
+    th:nth-child(1), td:nth-child(1) { width: 80px; }
+    th:nth-child(2), td:nth-child(2) { width: 100px; }
+    th:nth-child(3), td:nth-child(3) { width: 100px; }
+
+    .pos {
+      background: var(--bg-green);
+      color: var(--text-green);
+    }
+    .neg {
+      background: var(--bg-red);
+      color: var(--text-red);
+    }
+    .neutral {
+      background: #f2f2f2;
+      color: #555;
+    }
   </style>
 </head>
 <body>
-
   <h1>My Portfolio Watchlist</h1>
-  <div class="table-wrapper"></div>
+  <div class="table-wrapper">
     <table id="portfolio"></table>
   </div>
 
@@ -117,7 +103,7 @@
             const el = document.createElement(i === 0 ? "th" : "td");
             el.textContent = cell;
 
-            // Highlight Change % column (assumed 3rd column)
+            // Highlight Change % column
             if (i > 0 && j === 2) {
               const val = parseFloat(cell);
               if (!isNaN(val)) {
@@ -131,10 +117,10 @@
         });
       })
       .catch(error => {
-        document.getElementById("portfolio").innerHTML = "<tr><td colspan='3'>Failed to load data.</td></tr>";
+        document.getElementById("portfolio").innerHTML =
+          "<tr><td colspan='3'>Failed to load data.</td></tr>";
         console.error("Error loading CSV:", error);
       });
   </script>
-
 </body>
 </html>
