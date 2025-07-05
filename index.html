@@ -4,56 +4,77 @@
   <meta charset="UTF-8">
   <title>📉 My Portfolio Watchlist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
+    <style>
+        :root {
+      --font-base: 13px;
+      --font-heading: 18px;
+      --font-small: 12px;
+
+      --row-padding: 6px 8px;
+      --row-padding-compact: 4px 6px;
+
+      --color-bg: #f5f5f5;
+      --color-table-bg: #ffffff;
+      --color-text: #222;
+      --color-title: #0055cc;
+
+      --color-pos-bg: #d0f0d0;
+      --color-pos-text: green;
+      --color-neg-bg: #ffdada;
+      --color-neg-text: red;
+      --color-neutral-bg: #f2f2f2;
+      --color-neutral-text: #555;
+    }
+
+   body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f5f5f5;
-      color: #222;
+      background-color: var(--color-bg);
+      color: var(--color-text);
       margin: 0;
       padding: 16px;
-      font-size: 14px;
+      font-size: var(--font-base);
     }
     h1 {
-      font-size: 18px;
-      color: #0055cc;
+      font-size: var(--font-heading);
+      color: var(--color-title);
       margin-bottom: 10px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      background: white;
-      font-size: 13px;
+      background: var(--color-table-bg);
+      font-size: var(--font-base);
     }
     th, td {
-      padding: 6px 8px;
+      padding: var(--row-padding);
       border: 1px solid #ccc;
       text-align: center;
     }
     th {
-      background-color: #0055cc;
+      background-color: var(--color-title);
       color: white;
       font-weight: 600;
     }
     .pos {
-      background-color: #d0f0d0;
-      color: green;
+      background-color: var(--color-pos-bg);
+      color: var(--color-pos-text);
       font-weight: 500;
     }
     .neg {
-      background-color: #ffdada;
-      color: red;
+      background-color: var(--color-neg-bg);
+      color: var(--color-neg-text);
       font-weight: 500;
     }
     .neutral {
-      background-color: #f2f2f2;
-      color: #555;
+      background-color: var(--color-neutral-bg);
+      color: var(--color-neutral-text);
     }
     @media (max-width: 600px) {
       body {
-        font-size: 13px;
+        font-size: var(--font-small);
       }
       table {
-        font-size: 12px;
+        font-size: var(--font-small);
       }
       h1 {
         font-size: 16px;
