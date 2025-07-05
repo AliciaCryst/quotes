@@ -2,64 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>📈 My Portfolio Watchlist</title>
+  <title>📉 My Portfolio Watchlist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <head>
-    <meta http-equiv="refresh" content="120"> <!-- reload every 2 mins -->
-  </head>
-  
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f4;
+      background-color: #f5f5f5;
       color: #222;
       margin: 0;
-      padding: 20px;
+      padding: 16px;
+      font-size: 14px;
     }
     h1 {
+      font-size: 18px;
       color: #0055cc;
-      font-size: 24px;
+      margin-bottom: 10px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1em;
       background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      font-size: 13px;
     }
     th, td {
-      padding: 12px;
-      border: 1px solid #ddd;
+      padding: 6px 8px;
+      border: 1px solid #ccc;
       text-align: center;
     }
     th {
       background-color: #0055cc;
       color: white;
+      font-weight: 600;
     }
     .pos {
-      background-color: #d4f8d4;
+      background-color: #d0f0d0;
       color: green;
-      font-weight: bold;
+      font-weight: 500;
     }
     .neg {
-      background-color: #ffe0e0;
+      background-color: #ffdada;
       color: red;
-      font-weight: bold;
+      font-weight: 500;
     }
     .neutral {
-      background-color: #f0f0f0;
+      background-color: #f2f2f2;
       color: #555;
     }
     @media (max-width: 600px) {
-      table, thead, tbody, th, td, tr {
-        font-size: 14px;
+      body {
+        font-size: 13px;
+      }
+      table {
+        font-size: 12px;
+      }
+      h1 {
+        font-size: 16px;
       }
     }
   </style>
 </head>
 <body>
 
-  <h1>My Live Portfolio Watchlist</h1>
+  <h1>My Portfolio Watchlist</h1>
   <table id="portfolio"></table>
 
   <script>
@@ -78,7 +82,7 @@
             const el = document.createElement(i === 0 ? "th" : "td");
             el.textContent = cell;
 
-            // Apply gain/loss coloring to "Change %" column (3rd column = index 2)
+            // Highlight Change % column (assumed 3rd column)
             if (i > 0 && j === 2) {
               const val = parseFloat(cell);
               if (!isNaN(val)) {
@@ -99,5 +103,3 @@
 
 </body>
 </html>
-
-
